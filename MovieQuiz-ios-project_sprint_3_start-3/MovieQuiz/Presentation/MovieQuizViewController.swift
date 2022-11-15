@@ -2,16 +2,11 @@ import UIKit
 
 final class MovieQuizViewController: UIViewController {
     // MARK: - Lifecycle
-    
-
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
     @IBOutlet private var yesButton: UIButton!
     @IBOutlet private var noButton: UIButton!
-    
-    
-    
     private var currentQuestionIndex: Int = 0
     private var currentQuestion: QuizQuestion { questions[currentQuestionIndex] }
     private var correctAnswer: Int = 0
@@ -57,7 +52,7 @@ final class MovieQuizViewController: UIViewController {
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.cornerRadius = 20
-        imageView.layer.borderColor = isCorrect ? UIColor.green?.cgColor : UIColor.red?.cgColor
+        imageView.layer.borderColor = isCorrect ? UIColor.ypGreen?.cgColor : UIColor.ypRed?.cgColor
         noButton.isEnabled = false
         yesButton.isEnabled = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -81,7 +76,6 @@ final class MovieQuizViewController: UIViewController {
         }
     }
     
-    
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         print("yes")
         let userAnswer = true
@@ -93,9 +87,6 @@ final class MovieQuizViewController: UIViewController {
         let userAnswer = false
         showAnswerResult(isCorrect: userAnswer == currentQuestion.correctAnswer)
     }
-    
-    
-    
 }
 
 private let questions: [QuizQuestion] = [
@@ -140,23 +131,21 @@ private let questions: [QuizQuestion] = [
             text: "Рейтинг этого фильма больше чем 6?",
             correctAnswer: false)
     ]
-
-
 // для состояния "Вопрос задан"
-struct QuizStepViewModel {
+private struct QuizStepViewModel {
   let image: UIImage
   let question: String
   let questionNumber: String
 }
 
 // для состояния "Результат квиза"
-struct QuizResultsViewModel {
+private struct QuizResultsViewModel {
   let title: String
   let text: String
   let buttonText: String
 }
 
-struct QuizQuestion {
+private struct QuizQuestion {
   let image: String
   let text: String
   let correctAnswer: Bool
