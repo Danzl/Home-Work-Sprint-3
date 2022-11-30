@@ -1,7 +1,6 @@
 import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
-    // MARK: - Lifecycle
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
@@ -46,7 +45,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             self?.show(quiz: viewModel)
         }
     }
-    // MARK: - Private function
+
     private func getAppColor(_ name: String) -> CGColor {
         if let color = UIColor(named: name) {
             return color.cgColor
@@ -114,8 +113,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
                 dateFormatter.dateFormat = "dd.MM.YYYY HH:mm"
                 
                 let text = "Ваш результат: \(correctAnswers) из 10\n" +
-                "Количество сыграных квизов: \(statisticService.gamesCount)\n" +
-                "Рекорд: \(bestGame.correct)/\(bestGame.total) (\(dateFormatter.string(from: bestGame.date)))\n" +
+                "Количество сыгранных квизов: \(statisticService.gamesCount)\n" +
+                "Ваш рекорд: \(bestGame.correct)/\(bestGame.total) (\(dateFormatter.string(from: bestGame.date)))\n" +
                 "Средняя точность: (\(String(format: "%.2f", statisticService.totalAccuracy))%)\n"
                 
                 let viewModel = QuizResultsViewModel(
@@ -131,68 +130,4 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         yesButton.isEnabled = true
         noButton.isEnabled = true
     }
-    
 }
-/*
- Mock-данные
- 
- 
- Картинка: The Godfather
- Настоящий рейтинг: 9,2
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: The Dark Knight
- Настоящий рейтинг: 9
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: Kill Bill
- Настоящий рейтинг: 8,1
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: The Avengers
- Настоящий рейтинг: 8
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: Deadpool
- Настоящий рейтинг: 8
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: The Green Knight
- Настоящий рейтинг: 6,6
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: Old
- Настоящий рейтинг: 5,8
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: НЕТ
-
-
- Картинка: The Ice Age Adventures of Buck Wild
- Настоящий рейтинг: 4,3
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: НЕТ
-
-
- Картинка: Tesla
- Настоящий рейтинг: 5,1
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: НЕТ
-
-
- Картинка: Vivarium
- Настоящий рейтинг: 5,8
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: НЕТ
- */

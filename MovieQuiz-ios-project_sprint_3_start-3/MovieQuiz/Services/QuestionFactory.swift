@@ -11,14 +11,17 @@ fileprivate let questionString: String = "Рейтинг этого фильма
 
 class QuestionFactory: QuestionFactoryProtocol {
     weak var delegate: QuestionFactoryDelegate?
+    
     init(delegate: QuestionFactoryDelegate?) {
         self.delegate = delegate
     }
+    
     func requestNextQuestion() {
         guard let index = (0..<questions.count).randomElement() else {
             delegate?.didRecieveNextQuestion(question: nil)
             return
         }
+        
         let question = questions[safe: index]
         delegate?.didRecieveNextQuestion(question: question)
     }

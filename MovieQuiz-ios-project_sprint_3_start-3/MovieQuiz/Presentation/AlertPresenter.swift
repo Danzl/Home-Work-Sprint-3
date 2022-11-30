@@ -20,13 +20,12 @@ class AlertPresenter {
     
     func showResultsAlert() {
         let alert = UIAlertController(title: alertModel.title, message: alertModel.message, preferredStyle: .alert)
-        let action = UIAlertAction(title: alertModel.buttonText, style: .default) { _ in
-            self.alertModel.completion()
+        let action = UIAlertAction(title: alertModel.buttonText, style: .default) { [weak self] _ in
+            self?.alertModel.completion()
         }
         
         guard let viewController = viewController else { return }
         alert.addAction(action)
         viewController.present(alert, animated: true, completion: nil)
     }
-    
 }

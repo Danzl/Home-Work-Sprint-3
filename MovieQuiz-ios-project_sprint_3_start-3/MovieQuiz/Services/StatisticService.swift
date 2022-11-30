@@ -26,6 +26,7 @@ protocol StatisticService {
 
 final class StatisticServiceImplementation: StatisticService {
     private let userDefaults = UserDefaults.standard
+    private let magicNumber = 10.0
     
     private enum Keys: String {
         case correct, total, bestGame, gamesCount
@@ -53,7 +54,7 @@ final class StatisticServiceImplementation: StatisticService {
     
     var gamesCount: Int {
         get { userDefaults.integer(forKey: Keys.gamesCount.rawValue) }
-        set { userDefaults.set(newValue,  forKey: Keys.gamesCount.rawValue) }
+        set { userDefaults.set(newValue, forKey: Keys.gamesCount.rawValue) }
     }
     
     var totalScore: Int {
@@ -63,7 +64,7 @@ final class StatisticServiceImplementation: StatisticService {
     
     var totalAccuracy : Double {
         get {
-            return Double(totalScore) / Double(gamesCount) * 10.0
+            return Double(totalScore) / Double(gamesCount) * magicNumber
         }
     }
     
@@ -74,7 +75,6 @@ final class StatisticServiceImplementation: StatisticService {
         let currentGameRecord = GameRecord(correct: count, total: amount, date: Date())
         let lastGamesRecord = bestGame
         if lastGamesRecord < currentGameRecord {
-            // store current game as best
             bestGame = currentGameRecord
         }
     }
