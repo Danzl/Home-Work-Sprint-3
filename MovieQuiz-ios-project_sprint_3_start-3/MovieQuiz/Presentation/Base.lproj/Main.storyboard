@@ -120,17 +120,23 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Tet-m1-LYX">
+                                <rect key="frame" x="177.66666666666666" y="396" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ulC-4S-tbD"/>
                         <color key="backgroundColor" name="black"/>
                         <constraints>
                             <constraint firstItem="ulC-4S-tbD" firstAttribute="trailing" secondItem="giX-CC-MHZ" secondAttribute="trailing" constant="20" id="Ecm-dY-btw"/>
                             <constraint firstItem="giX-CC-MHZ" firstAttribute="leading" secondItem="ulC-4S-tbD" secondAttribute="leading" constant="20" id="ZYu-cM-MIS"/>
+                            <constraint firstItem="Tet-m1-LYX" firstAttribute="centerX" secondItem="9Ln-jw-e5f" secondAttribute="centerX" id="dIM-3C-JFi"/>
+                            <constraint firstItem="Tet-m1-LYX" firstAttribute="centerY" secondItem="9Ln-jw-e5f" secondAttribute="centerY" id="h4f-cg-FWt"/>
                             <constraint firstItem="giX-CC-MHZ" firstAttribute="top" secondItem="ulC-4S-tbD" secondAttribute="top" constant="10" id="maT-QU-t6r"/>
                             <constraint firstItem="ulC-4S-tbD" firstAttribute="bottom" secondItem="giX-CC-MHZ" secondAttribute="bottom" id="yC1-ov-xgn" userLabel="Safe Area.bottom = Stack View.bottom"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Tet-m1-LYX" id="C6E-Um-SGq"/>
                         <outlet property="counterLabel" destination="rGM-Xt-38f" id="HJr-8Q-Fhu"/>
                         <outlet property="imageView" destination="b1D-YC-wSR" id="Pwg-he-Upn"/>
                         <outlet property="noButton" destination="3Rw-BM-0rh" id="vdi-yV-G9X"/>
