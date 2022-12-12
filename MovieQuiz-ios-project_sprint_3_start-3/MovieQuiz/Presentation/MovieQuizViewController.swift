@@ -34,18 +34,13 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         guard let currentQuestion = currentQuestion else { return }
         blockButtons()
-        showAnswerResult(isCorrect: true == currentQuestion.correctAnswer)
+        showAnswerResult(isCorrect: currentQuestion.correctAnswer)
     }
     
     @IBAction private func noButtonClicked(_ sender: UIButton) {
         guard let currentQuestion = currentQuestion else { return }
         blockButtons()
-        showAnswerResult(isCorrect: false == currentQuestion.correctAnswer)
-    }
-    
-    private func showLoadingIndicator() {
-        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 40, 40))
-        self.view.addSubview(activityIndicator)
+        showAnswerResult(isCorrect: !currentQuestion.correctAnswer)
     }
     
     private func showNetworkError(message: String) {

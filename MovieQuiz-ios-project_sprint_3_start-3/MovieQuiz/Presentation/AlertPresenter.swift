@@ -5,18 +5,17 @@
 //  Created by Danzl Wa on 28.11.2022.
 //
 
-import Foundation
 import UIKit
 
 struct AlertPresenter: AlertProtocol {
     
-    weak var viewController: UIViewController?
+    private weak var viewController: UIViewController?
     
     init(viewController: UIViewController) {
         self.viewController = viewController
     }
     
-    internal func showAlert(quiz result: AlertModel) {
+    func showAlert(quiz result: AlertModel) {
         let alert = UIAlertController(title: result.title, message: result.message, preferredStyle: .alert)
         let action = UIAlertAction(title: result.buttonText, style: .default, handler: result.completion)
         

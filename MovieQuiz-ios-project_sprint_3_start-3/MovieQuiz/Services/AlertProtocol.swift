@@ -5,7 +5,6 @@
 //  Created by Danzl Wa on 11.12.2022.
 //
 
-import Foundation
 import UIKit
 
 protocol AlertProtocol {
