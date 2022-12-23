@@ -12,6 +12,12 @@ struct GameRecord: Codable, Comparable {
     var total: Int
     var date: Date
     
+    init(correct: Int, total: Int, date: Date) {
+        self.correct = correct
+        self.total = total
+        self.date = date
+    }
+    
     static func < (lhs: GameRecord, rhs: GameRecord) -> Bool {
         return lhs.correct < rhs.correct
     }
@@ -25,8 +31,22 @@ protocol StatisticService {
 }
 
 final class StatisticServiceImplementation: StatisticService {
+    func store(correct count: Int, total amount: Int) {
+        let currentGameResults = GameRecord(correct: count, total: amount, date: Date())
+        
+        if self.bestGame < currentGameResults {
+            self.bestGame = currentGameResults
+        }
+        
+        let correctStored = userDefaults.integer(forKey: Keys.correct.rawValue)
+        userDefaults.set(correctStored + count, forKey: Keys.correct.rawValue)
+        
+        let totalStored = userDefaults.integer(forKey: Keys.total.rawValue)
+        userDefaults.set(totalStored + amount, forKey: Keys.total.rawValue)
+        userDefaults.set(gamesCount + 1, forKey: Keys.gamesCount.rawValue)
+    }
+    
     private let userDefaults = UserDefaults.standard
-    private let magicNumber = 10.0
     
     private enum Keys: String {
         case correct, total, bestGame, gamesCount
@@ -38,16 +58,13 @@ final class StatisticServiceImplementation: StatisticService {
                   let record = try? JSONDecoder().decode(GameRecord.self, from: data) else {
                 return .init(correct: 0, total: 0, date: Date())
             }
-            
             return record
         }
-        
         set {
             guard let data = try? JSONEncoder().encode(newValue) else {
                 print("Невозможно сохранить результат")
                 return
             }
-            
             userDefaults.set(data, forKey: Keys.bestGame.rawValue)
         }
     }
@@ -63,19 +80,8 @@ final class StatisticServiceImplementation: StatisticService {
     }
     
     var totalAccuracy : Double {
-        get {
-            return Double(totalScore) / Double(gamesCount) * magicNumber
-        }
-    }
-    
-    func store(correct count: Int, total amount: Int) {
-        gamesCount += 1
-        totalScore += count
-        
-        let currentGameRecord = GameRecord(correct: count, total: amount, date: Date())
-        let lastGamesRecord = bestGame
-        if lastGamesRecord < currentGameRecord {
-            bestGame = currentGameRecord
-        }
+        let correctStored = userDefaults.double(forKey: Keys.correct.rawValue)
+        let totalStored = userDefaults.double(forKey: Keys.total.rawValue)
+        return (correctStored / totalStored) * 100
     }
 }

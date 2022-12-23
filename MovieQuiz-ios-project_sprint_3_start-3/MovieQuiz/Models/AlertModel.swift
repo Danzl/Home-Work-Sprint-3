@@ -2,14 +2,15 @@
 //  AlertModel.swift
 //  MovieQuiz
 //
-//  Created by Danzl Wa on 28.11.2022.
+//  Created by Danzl Wa on 23.12.2022.
 //
 
 import Foundation
 
-public struct AlertModel {
+struct AlertModel {
     let title: String
     let message: String
     let buttonText: String
-    let completion: () -> Void
+    let completion: (() -> Void)
 }
+
